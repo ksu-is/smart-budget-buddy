@@ -5,13 +5,22 @@ filename = "expenses.txt"
 
 def set_budget():
     global budget_limit
-    budget_limit = float(input("Enter your budget limit: $"))
-    print(f"Budget set to ${budget_limit:.2f}\n")
+    try:
+        budget_limit = float(input("Enter your budget limit: $"))
+        print(f"Budget set to ${budget_limit:.2f}\n")
+    except ValueError:
+        print("Please enter a valid number.\n")
 
 
 def add_expense():
     category = input("Enter category: ")
-    amount = float(input("Enter amount: "))
+
+    try:
+        amount = float(input("Enter amount: "))
+    except ValueError:
+        print("Invalid amount. Please enter a number.\n")
+        return
+
     expense = {"category": category, "amount": amount}
     expenses.append(expense)
     print("Expense added successfully.")
@@ -83,6 +92,18 @@ def save_expenses():
     print("Expenses saved to file.\n")
 
 
+def load_expenses():
+    try:
+        with open(filename, "r") as file:
+            expenses.clear()
+            for line in file:
+                category, amount = line.strip().split(",")
+                expenses.append({"category": category, "amount": float(amount)})
+        print("Expenses loaded from file.\n")
+    except FileNotFoundError:
+        print("No saved file found yet.\n")
+
+
 def main():
     while True:
         print("Smart Budget Buddy")
@@ -92,7 +113,8 @@ def main():
         print("4. Show Total Spending")
         print("5. Show Category Summary")
         print("6. Save Expenses")
-        print("7. Exit")
+        print("7. Load Expenses")
+        print("8. Exit")
 
         choice = input("Choose an option: ")
 
@@ -109,6 +131,8 @@ def main():
         elif choice == "6":
             save_expenses()
         elif choice == "7":
+            load_expenses()
+        elif choice == "8":
             print("Goodbye!")
             break
         else:
