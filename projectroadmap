@@ -1,0 +1,21 @@
+# Project Roadmap - Smart Budget Buddy
+
+## Sprint 1
+- [x] Choose project idea
+- [x] Create repository
+- [x] Write README
+- [x] Research similar Python projects
+
+## Sprint 2
+- [x] Create starter Python program
+- [x] Add expense input feature
+- [x] Show total spending
+- [x] Add category summaries
+- [x] Add budget warning feature
+- [x] Add save/load file handling
+
+## Next Tasks
+- [ ] Improve formatting of output
+- [ ] Add dates for expenses
+- [ ] Add monthly report feature
+- [ ] Test edge cases and errors
