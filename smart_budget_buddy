@@ -1,4 +1,11 @@
 expenses = []
+budget_limit = 0
+
+
+def set_budget():
+    global budget_limit
+    budget_limit = float(input("Enter your budget limit: $"))
+    print(f"Budget set to ${budget_limit:.2f}\n")
 
 
 def add_expense():
@@ -6,7 +13,10 @@ def add_expense():
     amount = float(input("Enter amount: "))
     expense = {"category": category, "amount": amount}
     expenses.append(expense)
-    print("Expense added successfully.\n")
+    print("Expense added successfully.")
+
+    check_budget()
+    print()
 
 
 def show_expenses():
@@ -25,6 +35,7 @@ def calculate_total():
     for expense in expenses:
         total += expense["amount"]
     print(f"Total spent: ${total:.2f}\n")
+    return total
 
 
 def category_summary():
@@ -48,26 +59,43 @@ def category_summary():
     print()
 
 
+def check_budget():
+    if budget_limit == 0:
+        return
+
+    total = 0
+    for expense in expenses:
+        total += expense["amount"]
+
+    if total > budget_limit:
+        print("Warning: You have exceeded your budget!")
+    elif total >= budget_limit * 0.9:
+        print("Alert: You are close to reaching your budget.")
+
+
 def main():
     while True:
         print("Smart Budget Buddy")
-        print("1. Add Expense")
-        print("2. Show Expenses")
-        print("3. Show Total Spending")
-        print("4. Show Category Summary")
-        print("5. Exit")
+        print("1. Set Budget")
+        print("2. Add Expense")
+        print("3. Show Expenses")
+        print("4. Show Total Spending")
+        print("5. Show Category Summary")
+        print("6. Exit")
 
         choice = input("Choose an option: ")
 
         if choice == "1":
-            add_expense()
+            set_budget()
         elif choice == "2":
-            show_expenses()
+            add_expense()
         elif choice == "3":
-            calculate_total()
+            show_expenses()
         elif choice == "4":
-            category_summary()
+            calculate_total()
         elif choice == "5":
+            category_summary()
+        elif choice == "6":
             print("Goodbye!")
             break
         else:
