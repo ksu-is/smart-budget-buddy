@@ -1,1 +1,43 @@
+expenses = []
 
+
+def add_expense():
+    category = input("Enter category: ")
+    amount = float(input("Enter amount: "))
+    expense = {"category": category, "amount": amount}
+    expenses.append(expense)
+    print("Expense added successfully.\n")
+
+
+def show_expenses():
+    if not expenses:
+        print("No expenses recorded.\n")
+        return
+
+    print("\nExpenses:")
+    for expense in expenses:
+        print(f"{expense['category']}: ${expense['amount']:.2f}")
+    print()
+
+
+def main():
+    while True:
+        print("Smart Budget Buddy")
+        print("1. Add Expense")
+        print("2. Show Expenses")
+        print("3. Exit")
+
+        choice = input("Choose an option: ")
+
+        if choice == "1":
+            add_expense()
+        elif choice == "2":
+            show_expenses()
+        elif choice == "3":
+            print("Goodbye!")
+            break
+        else:
+            print("Invalid choice. Try again.\n")
+
+
+main()
